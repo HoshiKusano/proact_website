@@ -14,9 +14,12 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('passwrd');
+            $table->string('password');
             $table->enum('grade', ['1', '2', '3', '4'])->comment('学年（1-4年生)');
             $table->boolean('authority')->default(false);
+            $table->string('email')->unique();
+            $table->timestamp('email_verified_at')->nullable();
+            $table->timestamps();
         });
     }
 
