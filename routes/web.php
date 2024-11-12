@@ -3,6 +3,9 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ToppageController;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\QuestionController;
+
 
 
 // トップページのルート
@@ -17,10 +20,21 @@ Route::get('/dashboard', function () {
 
 // その他のルート
 Route::middleware('auth')->group(function () {
+    Route::delete('/posts/{post}', [PostController::class,'delete']);
+    Route::get('/posts/{post}/edit', [PostController::class, 'edit']);
+    Route::put('/posts/{post}', [PostController::class, 'update']);
+    Route::post('/posts', [PostController::class, 'store']);
+    Route::get('/posts/create', [PostController::class, 'create']);
+    Route::get('/posts/{post}', [PostController::class ,'show']);
+    Route::get('/posts', [PostController::class, 'index'])->name('posts');
     Route::get('/toppage', [ToppageController::class, 'hello'])->name('toppage');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::get('/questions', [QuestionController::class, 'index'])->name('questions'); 
+    Route::get('/questions/create', [QuestionController::class, 'create'])->name('questions.create'); 
+    Route::post('/questions', [QuestionController::class, 'store']);
 });
 
 require __DIR__.'/auth.php';
