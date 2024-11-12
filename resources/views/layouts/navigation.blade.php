@@ -12,12 +12,19 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                    <x-nav-link :href="route('toppage')" :active="request()->routeIs('index')">
+                        {{ __('Proactとは') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('posts')" :active="request()->routeIs('index')">
                         {{ __('活動') }}
                     </x-nav-link>
                     <x-nav-link :href="route('index')" :active="request()->routeIs('index')">
-                        {{ __('welco') }}
+                        {{ __('オンライン意見箱') }}
                     </x-nav-link>
+                     <x-nav-link :href="route('index')" :active="request()->routeIs('index')">
+                        {{ __('先輩たちの軌跡') }}
+                    </x-nav-link>
+                     
                 </div>
             </div>
 
