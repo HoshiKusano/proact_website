@@ -37,9 +37,9 @@
                 <div class="w-full md:w-1/2">
                     <div class="relative">
                         <div class="absolute inset-0 bg-gradient-to-r from-indigo-100 to-blue-100 transform -rotate-3 rounded-2xl"></div>
-                        <img 
-                            src="{{ asset('images/zemiso.jpeg') }}" 
-                            alt="ゼミ相談室の画像" 
+                        <img
+                            src="https://res.cloudinary.com/dzycja3yu/image/upload/v1731508111/IMG_0159_linpp3.jpg"
+                            alt="ゼミ相談室の画像"
                             class="relative rounded-2xl shadow-xl w-full h-auto object-cover transform transition-transform duration-500 hover:scale-105"
                         >
                     </div>
