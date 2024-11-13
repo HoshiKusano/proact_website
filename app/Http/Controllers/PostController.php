@@ -6,13 +6,12 @@ use Illuminate\Http\Request;
 use App\Models\Post;
 use Cloudinary; 
 use App\Http\Requests\PostRequest;
-
 class PostController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function posts(Post $post)
+    public function index(Post $post)
     {
         return view('posts.posts')->with(['posts' => $post->getPaginateByLimit()]); 
     }
@@ -60,9 +59,10 @@ class PostController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+         */
+     public function delete(Post $post)
     {
-        //
+        $post->delete();
+        return redirect('/posts');
     }
-}
+    }

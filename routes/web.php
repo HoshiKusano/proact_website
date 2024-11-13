@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ToppageController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\AnswerController;
 
 
 
@@ -27,14 +28,17 @@ Route::middleware('auth')->group(function () {
     Route::get('/posts/create', [PostController::class, 'create']);
     Route::get('/posts/{post}', [PostController::class ,'show']);
     Route::get('/posts', [PostController::class, 'index'])->name('posts');
-    Route::get('/toppage', [ToppageController::class, 'hello'])->name('toppage');
+    Route::get('/toppage', [ToppageController::class, 'index'])->name('toppage');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::get('/questions', [QuestionController::class, 'index'])->name('questions'); 
     Route::get('/questions/create', [QuestionController::class, 'create'])->name('questions.create'); 
+    Route::get('/questions/{question}', [QuestionController::class, 'show'])->name('questions.show'); 
     Route::post('/questions', [QuestionController::class, 'store']);
+    Route::post('/questions/{question}/answer', [AnswerController::class, 'store']);
+    Route::get('/questions/{question}/answer/create', [AnswerController::class, 'create'])->name('answers.create'); 
 });
 
 require __DIR__.'/auth.php';

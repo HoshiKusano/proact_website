@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Question;
+use App\Models\Answer;
 use App\Models\CategoryList;
 use Illuminate\Support\Facades\Auth;
 
@@ -14,9 +15,9 @@ class QuestionController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Question $question)
     {
-        return view('questions.index');
+        return view('questions.index')->with(['questions' => $question->getPaginateByLimit()]);
     }
 
     /**
@@ -46,8 +47,7 @@ class QuestionController extends Controller
                  ];
              $categoryList->fill($categoryInput)->save();
         }
-        dd($categories);
-        return redirect('/posts/' . $post->id);
+        return redirect('/questions');
         
         
         
@@ -56,9 +56,13 @@ class QuestionController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Question $question, Answer $answer)
     {
-        //
+        return view('questions.show')->with([
+            'question' => $question,
+            'answers'  => $question->answer
+            
+            ]);
     }
 
     /**

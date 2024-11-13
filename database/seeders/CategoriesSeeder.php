@@ -9,21 +9,23 @@ use Faker\Factory as Faker;
 
 class CategoriesSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
-    public function run(): void
+    
+     public function run(): void
     {
-        
-        $faker = Faker::create('ja_JP'); // 日本語のFakerを作成
-        
-        for ($i = 0; $i < 5; $i++) {
-            DB::table('categories')->insert([
-                'name' => $faker->realText(10), // 5文字程度の日本語テキスト
-                
-            ]);
-         
-        }
+        DB::table('categories')->insert([
+            [
+                'name' => '1年生',
+            ],
+            [
+                'name' => '2年生',
+            ],
+            [
+                'name' => '3年生',
+            ],
+            [
+                'name' => '4年生',
+            ],
+        ]);
     }
     
 }
