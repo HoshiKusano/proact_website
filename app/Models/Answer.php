@@ -17,4 +17,7 @@ class Answer extends Model
     {
         return $this->belongsTo(Question::class);  
     }
+    
+    protected $fillable = ['body', 'question_id', 'user_id'];
 }
+

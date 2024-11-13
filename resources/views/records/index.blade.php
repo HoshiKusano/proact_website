@@ -18,16 +18,16 @@
                         <svg xmlns="http://www.w3.org/2000/svg" style="width: 20px; height: 20px; margin-right: 8px;" viewBox="0 0 20 20" fill="currentColor">
                             <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clip-rule="evenodd" />
                         </svg>
-                        質問する
+                        軌跡を記す
                     </span>
                 </a>
             </div>
 
             <div class="questions">
-                <h1 class="text-2xl font-bold mb-6">質問一覧</h1>
+                <h1 class="text-2xl font-bold mb-6">多文化社会学部のみんな</h1>
                     
                 <div class="space-y-4">
-                    @foreach ($questions as $question)
+                    @foreach ($question as $question)
                         <div class="bg-white p-6 rounded-lg shadow hover:shadow-md transition">
                             <a href="/questions/{{ $question->id }}" class="block">
                                 <h2 class="text-lg font-semibold text-gray-900 hover:text-blue-500">

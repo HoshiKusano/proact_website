@@ -18,13 +18,19 @@ return new class extends Migration
             $table->string('image_url')->nullable();
             $table->timestamps();
         });
+        
+        Schema::table('posts', function (Blueprint $table) {
+            $table->softDeletes(); // これでdeleted_atカラムが追加
+        });
     }
 
     /**
      * Reverse the migrations.
      */
-    public function down(): void
+    public function down()
     {
-        Schema::dropIfExists('posts');
+        Schema::table('posts', function (Blueprint $table) {
+            $table->dropSoftDeletes(); // ロールバック時の処理
+        });
     }
 };

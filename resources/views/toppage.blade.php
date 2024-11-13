@@ -1,35 +1,59 @@
 <x-app-layout>
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="flex flex-col md:flex-row justify-between items-start gap-8">
+    <div class="min-h-screen bg-gradient-to-b from-gray-50 to-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-16">
                 <!-- 左側のコンテンツ -->
-                <div class="w-full md:w-1/2 px-8">
+                <div class="w-full md:w-1/2 space-y-12">
                     <!-- タイトル部分 -->
-                    <h1 class="text-6xl font-extrabold mb-8 leading-tight tracking-tight">
-                        多文化社会学部を<br>
-                        学生の発想で盛り上げたい
+                    <h1 class="leading-tight tracking-tight text-gray-900">
+                        <span class="text-4xl md:text-5xl font-bold block mb-4">多文化社会学部を</span>
+                        <span class="text-5xl md:text-7xl font-extrabold text-indigo-600 block mb-4">学生の発想で</span>
+                        <span class="text-4xl md:text-5xl font-bold block">盛り上げたい</span>
                     </h1>
                     
                     <!-- 本文部分 -->
-                    <p class="text-base leading-relaxed mb-2 mt-16" style="font-feature-settings: 'palt';">
-                        学生の本質的な需要や課題への<br>
-                        アプローチから<br>
-                        楽しみ繋がれる機会まで。
-                    </p>
-                    <p class="text-base leading-relaxed mb-8 " style="font-feature-settings: 'palt';">
-                        私たちは多文化社会学部のために全<br>
-                        力で行動します。
-                    </p>
+                    <div class="space-y-6 text-gray-600">
+                        <p class="text-lg leading-relaxed" style="font-feature-settings: 'palt';">
+                            学生の本質的な需要や課題への<br>
+                            アプローチから<br>
+                            楽しみ繋がれる機会まで。
+                        </p>
+                        <p class="text-lg leading-relaxed" style="font-feature-settings: 'palt';">
+                            私たちは多文化社会学部のために全<br>
+                            力で行動します。
+                        </p>
+                    </div>
 
                     <!-- ビジョンボタン -->
-                    <button class="inline-flex items-center text-lg font-medium">
+                    <button class="group inline-flex items-center px-6 py-3 text-lg font-medium text-indigo-600 hover:text-indigo-500 transition-colors duration-200">
                         私たちのビジョン
-                        <span class="ml-2 w-8 h-8 flex items-center justify-center rounded-full border border-black">
+                        <span class="ml-3 w-8 h-8 flex items-center justify-center rounded-full border-2 border-indigo-600 group-hover:border-indigo-500 group-hover:bg-indigo-50 transition-all duration-200">
                             →
                         </span>
                     </button>
                 </div>
+                
+                <!-- 右側の画像 -->
+                <div class="w-full md:w-1/2">
+                    <div class="relative">
+                        <div class="absolute inset-0 bg-gradient-to-r from-indigo-100 to-blue-100 transform -rotate-3 rounded-2xl"></div>
+                        <img 
+                            src="{{ asset('images/zemiso.jpeg') }}" 
+                            alt="ゼミ相談室の画像" 
+                            class="relative rounded-2xl shadow-xl w-full h-auto object-cover transform transition-transform duration-500 hover:scale-105"
+                        >
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+
+    <style>
+        .bg-grid {
+            background-image: linear-gradient(rgba(99, 102, 241, 0.03) 1px, transparent 1px),
+                            linear-gradient(to right, rgba(99, 102, 241, 0.03) 1px, transparent 1px);
+            background-size: 4rem 4rem;
+            mask-image: linear-gradient(to bottom, transparent, black, transparent);
+        }
+    </style>
 </x-app-layout>
