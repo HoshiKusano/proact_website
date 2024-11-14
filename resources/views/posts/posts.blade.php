@@ -26,15 +26,33 @@
                    </span>
                </a>
            </div>
-
            <!-- 投稿一覧 -->
            <div class="space-y-6">
                @foreach ($posts as $post)
                    <div class="bg-white rounded-lg shadow p-6">
                        <div class="flex justify-between items-start">
-                           <h2 class="text-xl font-semibold text-gray-900 hover:text-blue-600">
-                               <a href="/posts/{{ $post->id }}">{{ $post->title }}</a>
-                           </h2>
+                           <div>
+                               <h2 class="text-xl font-semibold text-gray-900 hover:text-blue-600">
+                                   <a href="/posts/{{ $post->id }}">{{ $post->title }}</a>
+                               </h2>
+                               <!-- 日時を追加 -->
+                               <div class="flex items-center space-x-4 mt-2 text-sm text-gray-500">
+                                   <div class="flex items-center">
+                                       <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                       </svg>
+                                       <span>作成: {{ $post->created_at->format('Y年m月d日 H:i') }}</span>
+                                   </div>
+                                   @if($post->updated_at != $post->created_at)
+                                   <div class="flex items-center">
+                                       <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                       </svg>
+                                       <span>更新: {{ $post->updated_at->format('Y年m月d日 H:i') }}</span>
+                                   </div>
+                                   @endif
+                               </div>
+                           </div>
                            <form action="/posts/{{ $post->id }}" id="form_{{ $post->id }}" method="post">
                                @csrf
                                @method('DELETE')
@@ -48,14 +66,12 @@
                    </div>
                @endforeach
            </div>
-
            <!-- ページネーション -->
            <div class="mt-6">
                {{ $posts->links() }}
            </div>
        </div>
    </div>
-
    <script>
        function deletePost(id) {
            'use strict'

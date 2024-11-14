@@ -27,6 +27,7 @@ Route::middleware(['auth', 'undergraduate'])->group(function () {
     Route::get('/posts/{post}', [PostController::class ,'show']);
     Route::get('/posts', [PostController::class, 'index'])->name('posts');
     Route::get('/toppage', [ToppageController::class, 'index'])->name('toppage');
+    Route::get('/vision', [ToppageController::class, 'vision']);
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');

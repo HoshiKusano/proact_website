@@ -1,11 +1,16 @@
 <x-app-layout>
+    <form action = "/questions" method = "GET">
+        @csrf
+        <input type = "text" name = "search_text" value = ""/>
+        <button type="submit">送信</button>
+    </form>
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <!-- 質問するボタン -->
             <div class="mb-4">
                 <a href="/questions/create" style="
                     display: inline-block;
-                    background-color: #1e40af; /* 濃い青色 */
+                    background-color: #1e40af;
                     color: white;
                     font-weight: bold;
                     padding: 12px 24px;
@@ -23,18 +28,60 @@
                 </a>
             </div>
 
-            <div class="questions">
-                <h1 class="text-2xl font-bold mb-6">質問一覧</h1>
-                    
+            <!-- 未回答の質問 -->
+            <div class="mb-12">
+                <h1 class="text-2xl font-bold mb-6">
+                    未回答の質問
+                    <span class="text-sm font-normal text-gray-500 ml-2">
+                        回答を募集中の質問です
+                    </span>
+                </h1>
                 <div class="space-y-4">
                     @foreach ($questions as $question)
-                        <div class="bg-white p-6 rounded-lg shadow hover:shadow-md transition">
-                            <a href="/questions/{{ $question->id }}" class="block">
-                                <h2 class="text-lg font-semibold text-gray-900 hover:text-blue-500">
-                                    {{ $question->title }}
-                                </h2>
-                            </a>
-                        </div>
+                        @unless($question->has_reply)
+                            <div class="bg-white p-6 rounded-lg shadow hover:shadow-md transition border-l-4 border-yellow-400">
+                                <a href="/questions/{{ $question->id }}" class="block">
+                                    <h2 class="text-lg font-semibold text-gray-900 hover:text-blue-500">
+                                        {{ $question->title }}
+                                    </h2>
+                                    <div class="mt-2 text-sm text-gray-500">
+                                        <time>{{ $question->created_at->format('Y/m/d H:i') }}</time>
+                                    </div>
+                                </a>
+                            </div>
+                        @endunless
+                    @endforeach
+                </div>
+            </div>
+
+            <!-- 回答済みの質問 -->
+            <div>
+                <h1 class="text-2xl font-bold mb-6">
+                    回答済みの質問
+                    <span class="text-sm font-normal text-gray-500 ml-2">
+                        回答が付いた質問です
+                    </span>
+                </h1>
+                <div class="space-y-4">
+                    @foreach ($questions as $question)
+                        @if($question->has_reply)
+                            <div class="bg-white p-6 rounded-lg shadow hover:shadow-md transition border-l-4 border-green-400">
+                                <a href="/questions/{{ $question->id }}" class="block">
+                                    <h2 class="text-lg font-semibold text-gray-900 hover:text-blue-500">
+                                        {{ $question->title }}
+                                    </h2>
+                                    <div class="mt-2 flex items-center text-sm text-gray-500">
+                                        <time class="mr-4">{{ $question->created_at->format('Y/m/d H:i') }}</time>
+                                        <span class="flex items-center">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+                                            </svg>
+                                            {{ $question->answer_count ?? 0 }} 件の回答
+                                        </span>
+                                    </div>
+                                </a>
+                            </div>
+                        @endif
                     @endforeach
                 </div>
             </div>
