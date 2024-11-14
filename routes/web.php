@@ -14,13 +14,11 @@ Route::get('/', function () {
     return view('welcome');
 })->name('index');
 
-// ダッシュボードのルート（重複を解消）
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
 // その他のルート
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'undergraduate'])->group(function () {
+    Route::get('/dashboard', function () {return view('dashboard');})->middleware(['auth', 'verified'])->name('dashboard');
+    Route::get('/unauthorized', function () {return view('errors.unauthorized');})->name('unauthorized');
+
     Route::delete('/posts/{post}', [PostController::class,'delete']);
     Route::get('/posts/{post}/edit', [PostController::class, 'edit']);
     Route::put('/posts/{post}', [PostController::class, 'update']);

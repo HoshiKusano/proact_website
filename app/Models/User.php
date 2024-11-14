@@ -42,6 +42,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'grade',
+        'authority',
     ];
 
     /**
@@ -61,6 +63,17 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'authority' => 'boolean',
         'password' => 'hashed',
     ];
+    
+     /**
+     * 学部生かどうかを判定
+     *
+     * @return bool
+     */
+    public function isUndergraduate(): bool
+    {
+        return !$this->authority && in_array($this->grade, ['1', '2', '3', '4']);
+    }
 }
