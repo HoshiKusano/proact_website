@@ -15,9 +15,29 @@ class QuestionController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Question $question)
+    public function index(Question $question, Request $request)
     {
-        return view('questions.index')->with(['questions' => $question->getPaginateByLimit()]);
+        $searchText = $request->input("search_text");
+        if($searchText){
+            $spaceConversion = mb_convert_kana($searchText, 's');
+            $wordArraySearched = preg_split('/[\s,]+/', $spaceConversion, -1, PREG_SPLIT_NO_EMPTY);//半角と全角の区別をなくす
+            $query = Question::query(); //検索したいモデル
+            
+            foreach($wordArraySearched as $word){
+            $query->where('title', 'like', '%' . $word . '%')
+            ->orwhere('body', 'like', '%' . $word . '%');
+            }
+            $Questions = $query
+                    ->withCount('answer')  // 回答数をカウント
+                    ->withExists('answer as has_reply')  // 回答の有無を確認
+                    ->orderBy('updated_at', 'DESC')
+                    ->paginate(10);
+            
+            
+        }else{
+            $Questions = $question->getPaginateByLimit();
+        }
+        return view('questions.index')->with(['questions' => $Questions]);
     }
 
     /**

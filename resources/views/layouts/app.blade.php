@@ -10,6 +10,17 @@
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+        <style>
+            .pagination{
+                display:flex;
+                margin:auto;
+                width:fit-content;
+            }
+            .page-item{
+                border:1px solid gray;
+                padding:5px;
+            }
+        </style>
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])

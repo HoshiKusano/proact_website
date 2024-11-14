@@ -19,7 +19,10 @@ class Question extends Model
     public function getPaginateByLimit(int $limit_count = 10)
     {
         // updated_atで降順に並べたあと、limitで件数制限をかける
-        return $this->orderBy('updated_at', 'DESC')->paginate($limit_count);
+        return $this->withCount('answer')  // 回答数をカウント
+                    ->withExists('answer as has_reply')  // 回答の有無を確認
+                    ->orderBy('updated_at', 'DESC')
+                    ->paginate($limit_count);
     }
     public function categoryList()   
     {
