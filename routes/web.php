@@ -18,7 +18,6 @@ Route::get('/', function () {
 Route::middleware(['auth', 'undergraduate'])->group(function () {
     Route::get('/dashboard', function () {return view('dashboard');})->middleware(['auth', 'verified'])->name('dashboard');
     Route::get('/unauthorized', function () {return view('errors.unauthorized');})->name('unauthorized');
-
     Route::delete('/posts/{post}', [PostController::class,'delete']);
     Route::get('/posts/{post}/edit', [PostController::class, 'edit']);
     Route::put('/posts/{post}', [PostController::class, 'update']);
@@ -32,10 +31,16 @@ Route::middleware(['auth', 'undergraduate'])->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
+
+ 
+    Route::get('/questions/create', [QuestionController::class, 'create'])->name('questions.create');
     Route::get('/questions', [QuestionController::class, 'index'])->name('questions'); 
-    Route::get('/questions/create', [QuestionController::class, 'create'])->name('questions.create'); 
-    Route::get('/questions/{question}', [QuestionController::class, 'show'])->name('questions.show'); 
     Route::post('/questions', [QuestionController::class, 'store']);
+    
+    Route::get('/questions/{question}/edit', [QuestionController::class, 'edit']);
+    Route::put('/questions/{question}', [QuestionController::class, 'update']);
+    Route::get('/questions/{question}', [QuestionController::class, 'show'])->name('questions.show'); 
+   
     Route::post('/questions/{question}/answer', [AnswerController::class, 'store']);
     Route::get('/questions/{question}/answer/create', [AnswerController::class, 'create'])->name('answers.create'); 
 });
