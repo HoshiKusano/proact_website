@@ -8,12 +8,6 @@ use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\AnswerController;
 
 
-
-// トップページのルート
-Route::get('/', function () {
-    return view('welcome');
-})->name('index');
-
 // その他のルート
 Route::middleware(['auth', 'undergraduate'])->group(function () {
     Route::get('/dashboard', function () {return view('dashboard');})->middleware(['auth', 'verified'])->name('dashboard');
@@ -25,7 +19,7 @@ Route::middleware(['auth', 'undergraduate'])->group(function () {
     Route::get('/posts/create', [PostController::class, 'create']);
     Route::get('/posts/{post}', [PostController::class ,'show']);
     Route::get('/posts', [PostController::class, 'index'])->name('posts');
-    Route::get('/toppage', [ToppageController::class, 'index'])->name('toppage');
+    Route::get('/', [ToppageController::class, 'index'])->name('toppage');
     Route::get('/vision', [ToppageController::class, 'vision']);
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
