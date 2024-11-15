@@ -21,7 +21,7 @@
                     <x-nav-link :href="route('questions')" :active="request()->routeIs('index')">
                         {{ __('オンライン意見箱') }}
                     </x-nav-link>
-                     <x-nav-link :href="route('')" :active="request()->routeIs('index')">
+                     <x-nav-link :href="route('record')" :active="request()->routeIs('index')">
                         {{ __('先輩たちの軌跡') }}
                     </x-nav-link>
                      
