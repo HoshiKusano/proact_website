@@ -33,7 +33,7 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', new UniversityEmail],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:users', new UniversityEmail],
              'grade' => [
                 'required',
                 'string',
