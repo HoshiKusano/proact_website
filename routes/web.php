@@ -6,6 +6,7 @@ use App\Http\Controllers\ToppageController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\AnswerController;
+use App\Http\Controllers\RecordController;
 
 
 // その他のルート
@@ -37,6 +38,9 @@ Route::middleware(['auth', 'undergraduate'])->group(function () {
    
     Route::post('/questions/{question}/answer', [AnswerController::class, 'store']);
     Route::get('/questions/{question}/answer/create', [AnswerController::class, 'create'])->name('answers.create'); 
+    
+    
+    Route::get('/records', [RecordController::class, 'index'])->name('record'); 
 });
 
 require __DIR__.'/auth.php';
