@@ -88,17 +88,20 @@ class QuestionController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+     public function edit(Question $question)
     {
-        //
+        return view('questions.edit')->with(['question' => $question]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
-    {
-        //
+    public function update(Request $request, Question $question)
+    {   
+        $input_question = $request['question'];
+        $question->fill($input_question)->save();
+    
+        return redirect('/questions/' . $question->id);
     }
 
     /**
