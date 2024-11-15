@@ -18,6 +18,7 @@ class UserSeeder extends Seeder
          DB::table('users')->insert([
             'name'=>'KusanoHoshi',
             'email'=>'bb48122030@ms.nagasaki-u.ac.jp',
+            'grade'=> '3年生',
             'password'=> Hash::make('Hosi1025'),
             ]);
     }
