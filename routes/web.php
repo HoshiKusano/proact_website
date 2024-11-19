@@ -8,9 +8,10 @@ use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\AnswerController;
 use App\Http\Controllers\RecordController;
 
+ 
 
-// その他のルート
-Route::middleware(['auth', 'undergraduate'])->group(function () {
+Route::middleware('auth')->group(function () {
+    Route::middleware('undergraduate')->group(function () {
     Route::get('/dashboard', function () {return view('dashboard');})->middleware(['auth', 'verified'])->name('dashboard');
     Route::get('/unauthorized', function () {return view('errors.unauthorized');})->name('unauthorized');
     Route::delete('/posts/{post}', [PostController::class,'delete']);
@@ -29,18 +30,24 @@ Route::middleware(['auth', 'undergraduate'])->group(function () {
 
  
     Route::get('/questions/create', [QuestionController::class, 'create'])->name('questions.create');
-    Route::get('/questions', [QuestionController::class, 'index'])->name('questions'); 
+    Route::delete('/questions/{question}', [QuestionController::class,'delete']);
     Route::post('/questions', [QuestionController::class, 'store']);
     
     Route::get('/questions/{question}/edit', [QuestionController::class, 'edit']);
     Route::put('/questions/{question}', [QuestionController::class, 'update']);
-    Route::get('/questions/{question}', [QuestionController::class, 'show'])->name('questions.show'); 
+
    
     Route::post('/questions/{question}/answer', [AnswerController::class, 'store']);
     Route::get('/questions/{question}/answer/create', [AnswerController::class, 'create'])->name('answers.create'); 
     
+    Route::get('/questions', [QuestionController::class, 'index'])->name('questions');
+    Route::get('/questions/{question}', [QuestionController::class, 'show'])->name('questions.show');
     
     Route::get('/records', [RecordController::class, 'index'])->name('record'); 
 });
+
+});
+
+    
 
 require __DIR__.'/auth.php';
