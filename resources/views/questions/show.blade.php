@@ -3,15 +3,28 @@
         <div class="flex justify-between items-center mb-8">
             <h1 class="text-3xl font-bold text-gray-900">{{ $question->title }}</h1>
             <div class="flex gap-4">
-                <a href="/questions/{{ $question->id }}/edit" class="text-blue-600 hover:text-blue-800 font-medium">
-                    <span class="flex items-center">
-                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
-                        </svg>
-                        編集
-                    </span>
-                </a>
-            </div>
+                @auth
+                  @if(Auth::id() === $question->user_id || (Auth::user()->authority  ?? false))
+                    <a href="/questions/{{ $question->id }}/edit" class="text-blue-600 hover:text-blue-800 font-medium">
+                        <span class="flex items-center">
+                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                            </svg>
+                            編集
+                        </span>
+                    </a>
+                     
+                    <form action="/questions/{{ $question->id }}" id="form_{{ $question->id }}" method="post">
+                           @csrf
+                           @method('DELETE')
+                           <button type="button" onclick="deleteQuestion({{ $question->id }})"
+                               class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg text-sm transition duration-300">
+                               削除
+                           </button>
+                    </form>
+                  @endif
+                @endauth
+             </div>
         </div>
 
         <div class="mb-6">
@@ -42,6 +55,7 @@
         </div>
 
         <div class="flex justify-between items-center">
+         
             <a href="{{ route('questions') }}" class="text-gray-600 hover:text-gray-800 font-medium">
                 <span class="flex items-center">
                     <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -55,5 +69,14 @@
                 返答する
             </a>
         </div>
+       
     </div>
+    <script>
+    function deleteQuestion(id) {
+        'use strict'
+        if (confirm('削除すると復元できません。\n本当に削除しますか？')) {
+            document.getElementById(`form_${id}`).submit();
+        }
+    }
+    </script>
 </x-app-layout>

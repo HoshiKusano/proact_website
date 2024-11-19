@@ -68,6 +68,7 @@
                         回答を募集中の質問です
                     </span>
                 </h1>
+       
                 <div class="space-y-4">
                     @foreach ($questions as $question)
                         @unless($question->has_reply)
@@ -76,6 +77,15 @@
                                     <h2 class="text-lg font-semibold text-gray-900 hover:text-blue-500">
                                         {{ $question->title }}
                                     </h2>
+                                     <div class="flex gap-2 mt-2">
+                                        <div class="flex flex-wrap gap-2">
+                                            @foreach ($question->categories as $category)
+                                                <span class="px-2 py-1 bg-gray-100 text-gray-600 rounded-full text-sm">
+                                                    {{ $category->name }}
+                                                </span>
+                                            @endforeach
+                                        </div>
+                                    </div>
                                     <div class="mt-2 text-sm text-gray-500">
                                         <time>{{ $question->created_at->format('Y/m/d H:i') }}</time>
                                     </div>
@@ -102,6 +112,15 @@
                                     <h2 class="text-lg font-semibold text-gray-900 hover:text-blue-500">
                                         {{ $question->title }}
                                     </h2>
+                                    <div class="flex gap-2 mt-2">
+                                        <div class="flex flex-wrap gap-2">
+                                            @foreach ($question->categories as $category)
+                                                <span class="px-2 py-1 bg-gray-100 text-gray-600 rounded-full text-sm">
+                                                    {{ $category->name }}
+                                                </span>
+                                            @endforeach
+                                        </div>
+                                    </div>
                                     <div class="mt-2 flex items-center text-sm text-gray-500">
                                         <time class="mr-4">{{ $question->created_at->format('Y/m/d H:i') }}</time>
                                         <span class="flex items-center">
@@ -116,6 +135,7 @@
                         @endif
                     @endforeach
                 </div>
+        </div>
             </div>
 
             <div class="mt-6">

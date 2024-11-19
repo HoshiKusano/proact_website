@@ -52,7 +52,7 @@
         
         </a>
 
-            <x-primary-button class="w-24 inline-flex items-center justify-center">
+            <x-primary-button class="w-24 px-4 py-3 inline-flex items-center justify-center font-semibold">
                 {{ __('ログイン') }}
             </x-primary-button>
         </div>

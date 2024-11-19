@@ -37,7 +37,12 @@ class QuestionController extends Controller
         }else{
             $Questions = $question->getPaginateByLimit();
         }
-        return view('questions.index')->with(['questions' => $Questions]);
+        
+        $categories = Category::all();
+        return view('questions.index')->with([
+            'questions' => $Questions,
+            'categories' => $categories
+            ]);
     }
 
     /**
@@ -78,6 +83,7 @@ class QuestionController extends Controller
      */
     public function show(Question $question, Answer $answer)
     {
+         
         return view('questions.show')->with([
             'question' => $question,
             'answers'  => $question->answer
@@ -90,6 +96,9 @@ class QuestionController extends Controller
      */
      public function edit(Question $question)
     {
+         if (Auth::id() !== $question->user_id && !Auth::user()->authority) {
+        return redirect()->back();
+         }
         return view('questions.edit')->with(['question' => $question]);
     }
 
@@ -98,6 +107,9 @@ class QuestionController extends Controller
      */
     public function update(Request $request, Question $question)
     {   
+         if (Auth::id() !== $question->user_id && !Auth::user()->authority) {
+        return redirect()->back();
+        }
         $input_question = $request['question'];
         $question->fill($input_question)->save();
     
@@ -107,8 +119,13 @@ class QuestionController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+     public function delete(Question $question)
     {
-        //
+        if(Auth::id() !== $question->user_id && !Auth::user()->authority) {
+        return redirect()->back();
+        }
+        
+        $question->delete();
+        return redirect('/questions');
     }
 }
