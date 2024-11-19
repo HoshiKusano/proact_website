@@ -24,8 +24,8 @@ class PostController extends Controller
    
     public function create()
     {
-    if (Auth::id() !== $post->user_id && !Auth::user()->authority) {
-        return redirect()->back();
+    if (!Auth::user()->authority) {
+            return redirect()->back();
         }
     return view('posts.create');
     }
@@ -43,9 +43,9 @@ class PostController extends Controller
     
     public function edit(Post $post)
     {
-       if (Auth::id() !== $post->user_id && !Auth::user()->authority) {
-        return redirect()->back();
-       }
+       if (!Auth::user()->authority) {
+            return redirect()->back();
+        }
         return view('posts.edit')->with(['post' => $post]);
     }
 
@@ -54,8 +54,8 @@ class PostController extends Controller
      */
     public function update(PostRequest $request, Post $post)
     {   
-        if (Auth::id() !== $post->user_id && !Auth::user()->authority) {
-        return redirect()->back();
+        if (!Auth::user()->authority) {
+            return redirect()->back();
         }
         $input_post = $request['post'];
         if($request->file('image')){
@@ -72,7 +72,7 @@ class PostController extends Controller
          */
      public function delete(Post $post)
     {
-        if (Auth::id() !== $post->user_id && !Auth::user()->authority) {
+        if (!Auth::user()->authority) {
             return redirect()->back();
         }
         $post->delete();
