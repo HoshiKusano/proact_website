@@ -38,7 +38,6 @@
                 <div class="space-y-2">
                     <h3 class="text-xl font-semibold text-gray-700">カテゴリー</h3>
                     <select 
-                        multiple 
                         name="categories[]"
                         class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 min-h-[120px]"
                     >
@@ -48,7 +47,6 @@
                             </option>
                         @endforeach
                     </select>
-                    <p class="text-sm text-gray-500">※ 複数選択する場合は Ctrl キー（Mac の場合は Command キー）を押しながら選択してください</p>
                 </div>
                 
                 <!-- 送信ボタンと戻るリンク -->

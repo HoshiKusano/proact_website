@@ -1,20 +1,23 @@
 <x-guest-layout>
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
+    <div class = "text-center mb-4">
+        <h1 class = text-xl font-bold text-gray-900>ログイン画面</h1>
+    </div>
 
     <form method="POST" action="{{ route('login') }}">
         @csrf
 
         <!-- Email Address -->
         <div>
-            <x-input-label for="email" :value="__('Email')" />
+            <x-input-label for="email" :value="__('メールアドレス')" />
             <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
         <!-- Password -->
         <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
+            <x-input-label for="password" :value="__('パスワード')" />
 
             <x-text-input id="password" class="block mt-1 w-full"
                             type="password"
@@ -39,13 +42,22 @@
                 </a>
             @endif
         
-         <a href="{{ route('register') }}" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                    {{ __('Register') }}
-         </a>
+         <a href="{{ route('register') }}" 
+           class="inline-flex items-center justify-center w-24 px-4 py-2 text-sm font-semibold  
+           text-white bg-indigo-600 hover:bg-indigo-700 
+           rounded-lg transition duration-150 ease-in-out 
+           focus:outline-none focus:ring-2 focus:ring-offset-2
+           focus:ring-indigo-500">
+            {{ __('登録') }}
+        
+        </a>
 
-            <x-primary-button class="ms-3">
-                {{ __('Log in') }}
+            <x-primary-button class="w-24 inline-flex items-center justify-center">
+                {{ __('ログイン') }}
             </x-primary-button>
         </div>
     </form>
 </x-guest-layout>
+
+
+
