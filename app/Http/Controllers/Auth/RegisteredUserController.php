@@ -73,7 +73,7 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return redirect(RouteServiceProvider::HOME);
+        return redirect(route('toppage'));
         
      } catch (\Exception $e) {
             return back()
