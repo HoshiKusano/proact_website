@@ -20,6 +20,7 @@ class UserSeeder extends Seeder
             'email'=>'bb48122030@ms.nagasaki-u.ac.jp',
             'grade'=> '3',
             'password'=> Hash::make('Hosi1025'),
+            'authority' => true,
             ]);
     }
 }
