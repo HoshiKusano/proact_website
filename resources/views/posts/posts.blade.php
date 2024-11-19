@@ -2,11 +2,11 @@
    <div class="py-12">
        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
            <!-- ヘッダー部分 -->
-           
+           <h1 class="text-3xl font-bold text-gray-900">Proact日記</h1>
            @auth
               @if(Auth::user()->authority)
                    <div class="flex justify-between items-center mb-6">
-                       <h1 class="text-3xl font-bold text-gray-900">Proact日記</h1>
+                       
                        <a href='/posts/create' style="
                            display: inline-block;
                            background-color: #166534;
