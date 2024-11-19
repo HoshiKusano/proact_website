@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Post;
 use Cloudinary; 
 use App\Http\Requests\PostRequest;
+use Illuminate\Support\Facades\Auth;
 class PostController extends Controller
 {
     /**
